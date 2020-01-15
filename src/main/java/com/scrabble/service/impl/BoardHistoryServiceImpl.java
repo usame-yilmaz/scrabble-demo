@@ -6,10 +6,11 @@ import com.scrabble.model.Cell;
 import com.scrabble.repository.BoardHistoryJpaRespository;
 import com.scrabble.repository.BoardJpaRespository;
 import com.scrabble.service.BoardHistoryService;
-import com.scrabble.util.BoardUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import static com.scrabble.util.BoardUtils.CELL_COUNT;
 
 @Service
 @Transactional
@@ -38,8 +39,8 @@ public class BoardHistoryServiceImpl implements BoardHistoryService {
         Cell[][] cells = board.getCells();
         
         StringBuilder sb = new StringBuilder();
-        for(int j = 0; j<BoardUtils.CELL_COUNT; j++) {
-            for(int i=0;i<15;i++){
+        for(int j = 0; j<CELL_COUNT; j++) {
+            for(int i=0;i<CELL_COUNT;i++){
                 if(cells[i][j].getOccupied().equals(true)) {
                     sb.append(cells[i][j].getCharacter());
                 } else {

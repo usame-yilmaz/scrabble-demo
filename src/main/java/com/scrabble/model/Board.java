@@ -17,6 +17,8 @@ import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import java.util.Set;
 
+import static com.scrabble.util.BoardUtils.CELL_COUNT;
+
 
 @Entity
 @Builder
@@ -36,7 +38,7 @@ public class Board {
     private Integer playOrder;
 
     @Lob
-    private Cell[][] cells = new Cell[15][15];
+    private Cell[][] cells = new Cell[CELL_COUNT][CELL_COUNT];
     
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "board")
     private Set<Word> words;
