@@ -1,4 +1,4 @@
-
+## Swagger link
 swagger ile servisler çağrılabilir, link:
 http://localhost:8080/swagger-ui.html#/
 
@@ -6,7 +6,7 @@ h2 database console:
 http://localhost:8080/h2-console
 jdbc url: jdbc:h2:file./data/db
 
-Örnek requestler:
+## Örnek requestler:
 
 Create board
 curl -X POST "http://localhost:8099/game/createBoard"
