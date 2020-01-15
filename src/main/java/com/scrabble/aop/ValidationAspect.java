@@ -1,5 +1,6 @@
 package com.scrabble.aop;
 
+import com.scrabble.exception.ValidationException;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -54,7 +55,7 @@ public class ValidationAspect {
 					
 					ValidationUtils.invokeValidator(validator, call.getTarget(), mapBindingResult);
 					if (mapBindingResult.hasErrors()) {
-						throw new RuntimeException(mapBindingResult.getAllErrors().stream().findAny().get().toString());
+						throw new ValidationException(mapBindingResult.getAllErrors().stream().findAny().get().toString());
 					}
 				}
 		}

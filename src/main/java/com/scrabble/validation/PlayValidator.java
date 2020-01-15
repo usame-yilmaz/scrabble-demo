@@ -28,8 +28,7 @@ public class PlayValidator {
 
         @Autowired
         BoardValidationService boardValidationService;
-        
-        @Autowired
+
         CheckBoard() {
         }
 

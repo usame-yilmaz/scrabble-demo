@@ -1,5 +1,7 @@
 package com.scrabble.service.impl;
 
+import com.scrabble.exception.BoardStatusException;
+import com.scrabble.exception.InvalidWordException;
 import com.scrabble.model.Board;
 import com.scrabble.model.Cell;
 import com.scrabble.model.Move;
@@ -57,7 +59,7 @@ public class BoardServiceImpl implements BoardService {
             board.setPlayOrder(board.getPlayOrder()+1);
             boardJpaRespository.save(board);
         } else {
-            throw new RuntimeException(BoardUtils.WORD_NOT_VALID);
+            throw new InvalidWordException(BoardUtils.WORD_NOT_VALID);
         }
 
 
@@ -91,7 +93,7 @@ public class BoardServiceImpl implements BoardService {
             board.setStatus(status);
             boardJpaRespository.save(board);
         } else {
-            throw new RuntimeException(BoardUtils.BOARD_STATUS_NOT_VALID);
+            throw new BoardStatusException(BoardUtils.BOARD_STATUS_NOT_VALID);
         }
     }
 
