@@ -27,11 +27,12 @@ public class GameServiceImpl implements GameService {
     }
 
     @PostConstruct
-    private void loadDictionaries() throws IOException {
+    public boolean loadDictionaries() throws IOException {
         // Get instance from singleton object
         Game game = Game.getInstance();
         game.setDictionary(loadWords());
         game.setLetterPoints(loadPoints());
+        return true;
     }
     
     private Set<String> loadWords() throws IOException{

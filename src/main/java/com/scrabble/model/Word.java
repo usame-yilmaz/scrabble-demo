@@ -35,19 +35,24 @@ public class Word {
             return false;
         }
         Word word = (Word)obj;
-        return word.startCol.equals(startCol) && 
-                word.startRow.equals(startRow) && 
-                word.characters.equals(characters) &&
-                word.point.equals(point);
+        return startCol.equals(word.startCol) && 
+                startRow.equals(word.startRow) && 
+                characters.equals(word.characters) &&
+                point.equals(word.point);
     }
 
     @Override
     public int hashCode() {
         int result = 7;
-        result += 31 * characters.hashCode();
-        result += 31 * startCol.hashCode();
-        result += 31 * startRow.hashCode();
-        result += 31 * point.hashCode();
+        if(characters!=null) {
+            result += 31 * characters.hashCode();
+        } if(startCol!=null) {
+            result += 31 * startRow.hashCode();
+        } if(startRow!=null) {
+            result += 31 * startCol.hashCode();
+        } if(point!=null) {
+            result += 31 * point.hashCode();
+        }
         return result;
     }
 

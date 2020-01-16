@@ -33,7 +33,7 @@ public class GameController {
     /**
 	 * Used to create a Board in DB
 	 *
-	 * @return the {@link com.scrabble.model.Board} created
+	 * @return the {@link Board} created
 	 */
     @PostMapping(value = "/createBoard")
     public ResponseEntity<Long> createBoard() {

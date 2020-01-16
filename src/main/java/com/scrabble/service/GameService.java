@@ -3,9 +3,13 @@ package com.scrabble.service;
 import com.scrabble.model.Board;
 import com.scrabble.model.Game;
 
-public interface GameService {
+import java.io.IOException;
+
+public interface GameService  {
     
     void addBoardToGame(Board board);
+
+    boolean loadDictionaries() throws IOException;
 
     boolean isWordValid(String word);
 
