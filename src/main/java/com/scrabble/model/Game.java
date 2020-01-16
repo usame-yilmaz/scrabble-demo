@@ -15,10 +15,10 @@ public class Game {
     private List<Board> boards;
     private Set<String> dictionary;
     private Map<Character, Integer> letterPoints;
-    private static Game ourInstance = new Game();
+    private static final Game SINGLE_INSTANCE = new Game();
 
     public static Game getInstance() {
-        return ourInstance;
+        return SINGLE_INSTANCE;
     }
 
     private Game() {

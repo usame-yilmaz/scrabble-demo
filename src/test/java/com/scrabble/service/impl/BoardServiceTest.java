@@ -33,9 +33,6 @@ public  class BoardServiceTest {
     @InjectMocks
     public BoardService boardService = new BoardServiceImpl();
 
-//    @InjectMocks
-//    public GameService gameService = new GameServiceImpl();
-    
     @Mock
     BoardJpaRespository boardJpaRespository;
 

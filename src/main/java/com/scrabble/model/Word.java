@@ -18,6 +18,7 @@ public class Word {
     @Id
     private Long id;
 
+    // reference to board object
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "BOARD_ID", nullable = false)
     @NotFound(action= NotFoundAction.IGNORE)
@@ -29,6 +30,7 @@ public class Word {
     private PositionEnum position;
     private Integer point;
 
+    // equals and hashcode overridden for Collection operations
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof Word)) {
@@ -56,6 +58,7 @@ public class Word {
         return result;
     }
 
+    // to visualize Word object
     @Override
     public String toString() {
         return "Word: "+characters+" Points:" + point ;
