@@ -26,6 +26,7 @@ public class GameServiceImpl implements GameService {
         game.getBoards().add(board);
     }
 
+    // load dictionary and word points from resource
     @PostConstruct
     public boolean loadDictionaries() throws IOException {
         // Get instance from singleton object

@@ -20,7 +20,8 @@ public class BoardHistoryServiceImpl implements BoardHistoryService {
 
     @Autowired
     BoardJpaRespository boardJpaRespository;
-    
+
+    // Save board content into database
     public void archive(Long boardId) {
         
         Board board = boardJpaRespository.findOne(boardId);
@@ -28,13 +29,15 @@ public class BoardHistoryServiceImpl implements BoardHistoryService {
         BoardHistory history = BoardHistory.builder().board(board).playOrder(board.getPlayOrder()).content(content).build();
         boardHistoryJpaRespository.save(history);
     }
-    
+
+    // retrieve board content from db
     public String getBoardContent(Long boardId, Integer sequence) {
         Board board = boardJpaRespository.findOne(boardId);
         BoardHistory history = boardHistoryJpaRespository.findDistinctByBoardAndPlayOrder(board, sequence);
         return history.getContent().replace("-","<br>").replace(" ", "*");
     }
 
+    // get content of the board to be saved (formatted)
     private String getContent(Board board) {
         Cell[][] cells = board.getCells();
         

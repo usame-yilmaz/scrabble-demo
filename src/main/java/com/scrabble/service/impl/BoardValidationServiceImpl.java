@@ -17,7 +17,8 @@ import java.util.List;
 public class BoardValidationServiceImpl implements BoardValidationService {
     @Autowired
     BoardJpaRespository boardJpaRespository;
-    
+
+    // check if board status is active
     public boolean isAvailableForPlay(Long boardId) {
         Board board = getBoardFromDb(boardId);
         if(board == null) {
@@ -26,6 +27,7 @@ public class BoardValidationServiceImpl implements BoardValidationService {
         return StatusEnum.ACTIVE.equals(board.getStatus());
     }
 
+    // all given moves(letters) should be either on same row or column
     public boolean isMoveOrdered(List<Move> moves) {
 
         boolean allRowEqual= true;
@@ -44,6 +46,8 @@ public class BoardValidationServiceImpl implements BoardValidationService {
         return allColEqual||allRowEqual;
     }
 
+    // moves should not be on occupied cells
+    // moves should be on cells that at least one neighbour is occupied(left-right-up-bottom)
     public boolean isMoveValid(Long boardId, List<Move> moves) {
 
         Board board = getBoardFromDb(boardId);
@@ -57,18 +61,28 @@ public class BoardValidationServiceImpl implements BoardValidationService {
                 moves.stream().anyMatch(move -> isCellAvailableForInsert(move.getRow(), move.getColumn(), cells));
     }
 
+    // check if cell occupied
     private boolean isCellOccupied(int row, int column, Cell[][] cells) {
         return  cells[row][column].getOccupied();
     }
 
+    // moves should be on cells that at least one neighbour is occupied(left-right-up-bottom)
     private boolean isCellAvailableForInsert(int row, int column, Cell[][] cells) {
         return  cells[row+1][column].getOccupied() ||
                 cells[row-1][column].getOccupied() ||
                 cells[row][column+1].getOccupied() ||
                 cells[row][column-1].getOccupied();
     }
-    
-    
+
+    // board should exist
+    public boolean isBoardExists(Long boardId) {
+        Board board = getBoardFromDb(boardId);
+        if(board == null) {
+            return false;
+        }
+        return true;
+    }
+
     private Board getBoardFromDb(Long boardId){
         return boardJpaRespository.findOne(boardId);
     }

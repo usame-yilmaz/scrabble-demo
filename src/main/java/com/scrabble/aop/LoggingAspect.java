@@ -18,13 +18,10 @@ public class LoggingAspect {
         private static final Logger logger = LoggerFactory.getLogger(LoggingAspect.class);
 
         @Pointcut("execution(* com.scrabble.controller..*(..))")
-        public void resource()
-        {
-            // nothing to do
-        }
+        public void resource(){ }
 
         @Around("resource()")
-        public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable
+        public Object logApiCalls(ProceedingJoinPoint joinPoint) throws Throwable
         {
             long startTime = System.currentTimeMillis();
             logger.info("Api called: {}.{}({}) -> duration : {} ms", 
@@ -36,7 +33,7 @@ public class LoggingAspect {
         }
 
         @AfterThrowing(pointcut = "resource()", throwing = "exception")
-        public void logAfterThrowing(JoinPoint joinPoint, Throwable exception)
+        public void logExceptions(JoinPoint joinPoint, Throwable exception)
         {
             logger.error("Exception  {} ", joinPoint.getSignature().getName());
             logger.error("Cause : {} ", exception.getMessage(), exception);

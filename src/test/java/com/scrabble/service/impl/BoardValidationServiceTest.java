@@ -124,5 +124,32 @@ public  class BoardValidationServiceTest {
 
         assertTrue(result);
     }
-    
+
+    @Test
+    public void isBoardExistsTest() {
+        //given
+        Long boardId = 1L;
+        Board boardWithId = Board.builder().id(boardId).status(StatusEnum.ACTIVE).build();
+
+
+        //when
+        when(boardJpaRespository.findOne(boardId)).thenReturn(boardWithId);
+
+        boolean result = boardValidationService.isBoardExists(boardId);
+
+        assertTrue(result);
+    }
+
+    @Test
+    public void isBoardExistsTestThrowsException() {
+        //given
+        Long boardId = 1L;
+
+        //when
+        when(boardJpaRespository.findOne(boardId)).thenReturn(null);
+
+        boolean result = boardValidationService.isBoardExists(boardId);
+
+        assertFalse(result);
+    }
 }

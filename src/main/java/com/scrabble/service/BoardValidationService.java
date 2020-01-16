@@ -11,5 +11,7 @@ public interface BoardValidationService {
     boolean isMoveOrdered(List<Move> moves);
 
     boolean isMoveValid(Long boardId, List<Move> moves);
+
+    boolean isBoardExists(Long boardId);
     
 }

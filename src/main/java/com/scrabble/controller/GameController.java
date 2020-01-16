@@ -10,11 +10,7 @@ import com.scrabble.service.GameService;
 import com.scrabble.validation.PlayValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Set;
@@ -48,7 +44,7 @@ public class GameController {
      * Used to play
      */
     @PostMapping(value = "/play")
-    @ScrabbleValidator(validator = PlayValidator.CheckBoard.class)
+    @ScrabbleValidator(validator = PlayValidator.CheckPlay.class)
     public ResponseEntity<Boolean> play(@RequestParam Long boardId, @RequestParam List<Move> moves) {
         boardService.play(boardId, moves);
         boardHistoryService.archive(boardId);
@@ -59,6 +55,7 @@ public class GameController {
      * Get words of the board
      */
     @GetMapping(value = "/getWords")
+    @ScrabbleValidator(validator = PlayValidator.CheckBoard.class)
     public ResponseEntity<Set<String>> getWords(@RequestParam Long boardId) {
 
         return ResponseEntity.ok(boardService.getWords(boardId));
@@ -68,6 +65,7 @@ public class GameController {
      * Get contents of the board with given sequence 
      */
     @GetMapping(value = "/getBoardContent")
+    @ScrabbleValidator(validator = PlayValidator.CheckBoard.class)
     public ResponseEntity<String> getBoardContent(@RequestParam Long boardId, @RequestParam Integer sequence) {
 
         return ResponseEntity.ok(boardHistoryService.getBoardContent(boardId, sequence));
@@ -77,8 +75,10 @@ public class GameController {
      * Set status of the board
      */
     @PostMapping(value = "/setStatus")
-    public void setStatus(@RequestParam Long boardId, @RequestParam StatusEnum status) {
+    @ScrabbleValidator(validator = PlayValidator.CheckBoard.class)
+    public ResponseEntity<Boolean> setStatus(@RequestParam Long boardId, @RequestParam StatusEnum status) {
 
         boardService.setStatus(boardId, status);
+        return ResponseEntity.ok(Boolean.TRUE);
     }
 }

@@ -15,7 +15,10 @@ public class BoardUtils {
     public static final String BOARD_STATUS_NOT_VALID = "Board status is not valid.";
 
     private BoardUtils(){}
-    
+
+    // used to initialize cells with empty and occupied:false values
+    // could be done in constructor of the Cell object
+    // kept for being able to make specific modifications on initialization
     public static Cell[][] initializeCells() {
         Cell[][] cells = new Cell[CELL_COUNT][CELL_COUNT];
         for(int i=0;i<CELL_COUNT;i++) {
@@ -27,6 +30,7 @@ public class BoardUtils {
 
     }
 
+    // two dimensional array copy, using standard Arrays.copyOf static utility
     public static Cell[][] copyCells(Cell[][] cellsOriginal) {
 
         return Arrays.stream(cellsOriginal)
@@ -34,6 +38,12 @@ public class BoardUtils {
                 .toArray(Cell[][]::new);
     }
 
+    // Scan given row for new words
+    // if new words exists add to set
+    //
+    // NOTE: this algorithm could be improved, in terms of performance
+    // if all moves(letters) are on the same row, below method will find same words multiple times
+    // (set data structures provides uniqueness)
     public static void checkRowForNewWords(int posX, int posY, Cell[][] cells, Set<Word> words) {
         int xLeft = posX;
         int xRight = posX;
@@ -52,6 +62,7 @@ public class BoardUtils {
         }
     }
 
+    // same comments above works for checkRowForNewWords method for columns as well
     public static void checkColumnForNewWords(int posX, int posY, Cell[][] cells, Set<Word> words) {
         int yUp = posY;
         int yBottom = posY;
@@ -71,11 +82,13 @@ public class BoardUtils {
         }
     }
 
+    // add to words set
     private static void addToWords(int posX, int posY, String word, Set<Word> words) {
         words.add(
                 Word.builder().characters(word).startRow(posX).startCol(posY).point(calculatePoints(word)).build());
     }
-    
+
+    // calculate points using given values
     private static Integer calculatePoints(String word) {
         return word.chars().mapToObj(c -> (char) c).map(GameService::getPoint).collect(Collectors.summingInt(Integer::intValue));
 
