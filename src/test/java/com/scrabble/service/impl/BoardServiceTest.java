@@ -9,24 +9,17 @@ import com.scrabble.model.StatusEnum;
 import com.scrabble.model.Word;
 import com.scrabble.repository.BoardJpaRespository;
 import com.scrabble.service.BoardService;
-import com.scrabble.service.GameService;
 import com.scrabble.util.BoardUtils;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;

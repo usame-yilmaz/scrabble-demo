@@ -1,10 +1,7 @@
 package com.scrabble.service.impl;
 import com.scrabble.model.Board;
-import com.scrabble.model.BoardHistory;
 import com.scrabble.model.Cell;
-import com.scrabble.repository.BoardHistoryJpaRespository;
 import com.scrabble.repository.BoardJpaRespository;
-import com.scrabble.service.BoardHistoryService;
 import com.scrabble.service.GameService;
 import com.scrabble.util.BoardUtils;
 import org.junit.Test;
@@ -15,9 +12,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.HashSet;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)

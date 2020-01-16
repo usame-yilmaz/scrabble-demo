@@ -1,17 +1,10 @@
 package com.scrabble.service.impl;
-import com.scrabble.exception.BoardStatusException;
-import com.scrabble.exception.InvalidWordException;
 import com.scrabble.model.Board;
 import com.scrabble.model.BoardHistory;
 import com.scrabble.model.Cell;
-import com.scrabble.model.Move;
-import com.scrabble.model.PositionEnum;
-import com.scrabble.model.StatusEnum;
-import com.scrabble.model.Word;
 import com.scrabble.repository.BoardHistoryJpaRespository;
 import com.scrabble.repository.BoardJpaRespository;
 import com.scrabble.service.BoardHistoryService;
-import com.scrabble.service.BoardService;
 import com.scrabble.util.BoardUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,12 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import javax.validation.constraints.AssertTrue;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
